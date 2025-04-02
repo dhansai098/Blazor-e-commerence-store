@@ -1,0 +1,127 @@
+// Activity 1: Using Microsoft Copilot to Generate Blazor Code
+// Simple Blazor Component
+
+@page "/hello"
+<h3>Hello, Blazor!</h3>
+<p>Welcome to the Blazor app generated with Copilot.</p>
+<button @onclick="ShowMessage">Click Me</button>
+<p>@message</p>
+
+@code {
+    private string message = "";
+    private void ShowMessage()
+    {
+        message = "Hello from Blazor!";
+    }
+}
+
+// Activity 2: Using Microsoft Copilot for Debugging and Optimization
+// Optimized Data Fetching
+
+@page "/optimized"
+<h3>Optimized Data Loading</h3>
+<ul>
+    @foreach (var item in items)
+    {
+        <li>@item</li>
+    }
+</ul>
+
+@code {
+    private List<string> items = new();
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+    private async Task LoadDataAsync()
+    {
+        await Task.Delay(500); // Simulate async data fetching
+        items = new List<string> { "Item1", "Item2", "Item3" };
+    }
+}
+
+// Activity 3: Develop a Comprehensive Blazor Project with Microsoft Copilot
+// A simple Blazor Library Management System
+
+@page "/library"
+<h3>Library Management</h3>
+<input @bind="searchTerm" placeholder="Search Books" />
+<button @onclick="SearchBooks">Search</button>
+
+<ul>
+    @foreach (var book in filteredBooks)
+    {
+        <li>@book</li>
+    }
+</ul>
+
+@code {
+    private string searchTerm = "";
+    private List<string> books = new() { "Blazor Essentials", "C# Fundamentals", "ASP.NET Core Guide" };
+    private List<string> filteredBooks = new();
+
+    protected override void OnInitialized()
+    {
+        filteredBooks = new List<string>(books);
+    }
+
+    private void SearchBooks()
+    {
+        filteredBooks = books.Where(b => b.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+}
+
+// Activity 4: Blazor E-Commerce Store
+// A simple e-commerce store with product listing and cart management
+
+@page "/store"
+<h3>Blazor E-Commerce Store</h3>
+
+<h4>Products</h4>
+<ul>
+    @foreach (var product in products)
+    {
+        <li>
+            @product.Name - $@product.Price
+            <button @onclick="() => AddToCart(product)">Add to Cart</button>
+        </li>
+    }
+</ul>
+
+<h4>Shopping Cart</h4>
+<ul>
+    @foreach (var item in cart)
+    {
+        <li>
+            @item.Name - $@item.Price
+            <button @onclick="() => RemoveFromCart(item)">Remove</button>
+        </li>
+    }
+</ul>
+
+@code {
+    private List<Product> products = new()
+    {
+        new Product { Name = "Laptop", Price = 999.99M },
+        new Product { Name = "Smartphone", Price = 499.99M },
+        new Product { Name = "Headphones", Price = 79.99M }
+    };
+    
+    private List<Product> cart = new();
+    
+    private void AddToCart(Product product)
+    {
+        cart.Add(product);
+    }
+    
+    private void RemoveFromCart(Product product)
+    {
+        cart.Remove(product);
+    }
+    
+    private class Product
+    {
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+    }
+}
